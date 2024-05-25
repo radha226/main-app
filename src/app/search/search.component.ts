@@ -1,87 +1,60 @@
-import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { MovieService } from '../service/movie.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html'
 })
-export class SearchComponent {
-  title: string = '';
+export class SearchComponent implements OnInit {
+  title = '';
   movie: any;
-  errorMessage: string = '';
+  errorMessage = '';
   private searchTerms = new Subject<string>();
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService) {}
 
-  
-onSearch(term: string): void {
-  this.searchTerms.next(term);
-}
-  handleSearchError(): void {
+  onSearch(): void {
+    this.searchTerms.next(this.title);
+  }
+
+  private handleSearchError(): void {
     this.movie = null;
     this.errorMessage = 'Movie not found';
-  }
-  
-  
-  fetchMovieDetails(): void {
-    this.movieService.getMovieDetails(this.title).subscribe(
-      data => {
-        console.log("data", data)
-        if (data && data.Response !== 'False') {
-          this.movie = data;
-          this.errorMessage = '';
-          const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
-          iframe.src = `http://localhost:4500?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
-     
-          //  iframe.src = `https://radha226.github.io/movie-directory-child/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
-
-          } else {
-          this.handleSearchError(); // Handle error
-          const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
-          // iframe.src = `https://your-username.github.io/child-application/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}`;
-      
-          iframe.src = ""
-        }
-      },
-      error => {
-        this.handleSearchError(); // Handle error
-      }
-    );
+    this.updateIframeSrc('');
   }
 
+  private updateIframeSrc(src: string): void {
+    const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
+    iframe.src = src;
+  }
+
+  private setMovieData(data: any): void {
+    if (data && data.Response !== 'False') {
+      this.movie = data;
+      this.errorMessage = '';
+      this.updateIframeSrc(
+        `${environment.childUrl}?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`
+      );
+    } else {
+      this.handleSearchError();
+    }
+  }
 
   ngOnInit(): void {
     this.searchTerms.pipe(
-      debounceTime(400),
+      debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.movieService.getMovieDetails(term).pipe(
-        catchError(error => {
-          this.errorMessage = 'Movie not found';
-          return of(null);
-        })
-      ))
-    ).subscribe(data => {
-      if (data && data.Response !== 'False') {
-        this.movie = data;
-        this.errorMessage = '';
-        const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
-        iframe.src = `http://localhost:4500?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
-      
-        // iframe.src = `https://radha226.github.io/movie-directory-child/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
-
-      } else {
-        this.movie = null;
-        this.errorMessage = 'Movie not found.';
-       
-        const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
-          // iframe.src = `https://your-username.github.io/child-application/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}`;
-      
-          iframe.src = ""
- 
-      }
-    });
+      switchMap((term: string) => 
+        this.movieService.getMovieDetails(term).pipe(
+          catchError(error => {
+            this.errorMessage = 'Movie not found';
+            return of(null);
+          })
+        )
+      )
+    ).subscribe(data => this.setMovieData(data));
   }
 }

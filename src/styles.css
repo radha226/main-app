@@ -20,8 +20,6 @@ section app-display{
 
 main.main-wrapper {
     display: flex;
-    /* height: 100vh; */
-    /* width: 100vw; */
     overflow:auto;
 }
 
@@ -48,22 +46,22 @@ main.main-wrapper aside .form-wrapper {
 }
 .search{
   width: 15px;
-    padding: 2px 0 0 0;
-    cursor: pointer;
+  padding: 2px 0 0 0;
+  cursor: pointer;
 }
 
 main.main-wrapper aside .form-wrapper input[type="text"] {
-    border: 0;
-    padding: 15px;
-    font-size: 16px;
-    outline: none;
-    border-radius: 3px;
-    width: calc(100% - 16px);
-    background: transparent;
-    color:black;
+  border: 0;
+  padding: 15px;
+  font-size: 16px;
+  outline: none;
+  border-radius: 3px;
+  width: calc(100% - 16px);
+  background: transparent;
+  color:black;
 }
 main.main-wrapper aside .form-wrapper i {
-    width: 16px;
+  width: 16px;
 }
 .main-wrapper section {
   display: flex;
@@ -74,18 +72,18 @@ main.main-wrapper aside .form-wrapper i {
 
 @media only screen and (max-width: 1024px) {
   main.main-wrapper {
-      flex-direction: column;
-      background: #212121;
+    flex-direction: column;
+    background: #212121;
   }
 
   main.main-wrapper section {
-      width: 100%;
-      flex-grow: 1;
+    width: 100%;
+    flex-grow: 1;
   }
 
   main.main-wrapper aside {
-      width: 100%;
-      padding-bottom: 40px;
+    width: 100%;
+    padding-bottom: 40px;
   }
   main.main-wrapper aside .logo-wrapper{
     text-align: center;
@@ -94,7 +92,7 @@ main.main-wrapper aside .form-wrapper i {
 
 @media only screen and (max-width: 768px) {
   main.main-wrapper section {
-      padding:10px 10px;
+    padding:10px 10px;
   }
 }
 @media only screen and (max-width: 550px) {
@@ -104,14 +102,14 @@ main.main-wrapper aside .form-wrapper i {
 }
 @media only screen and (max-width: 425px) {
   main.main-wrapper aside .logo-wrapper, main.main-wrapper section {
-      padding-left: 16px;
-      padding-right: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   main.main-wrapper aside .form-wrapper {
-      margin: 0px 16px;
-
+    margin: 0px 16px;
   }
+  
   main.main-wrapper aside{
     min-width:100%;
   }
