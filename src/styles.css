@@ -47,7 +47,6 @@ main.main-wrapper aside .form-wrapper {
 .search{
   width: 15px;
   padding: 2px 0 0 0;
-  cursor: pointer;
 }
 
 main.main-wrapper aside .form-wrapper input[type="text"] {
@@ -109,7 +108,7 @@ main.main-wrapper aside .form-wrapper i {
   main.main-wrapper aside .form-wrapper {
     margin: 0px 16px;
   }
-  
+
   main.main-wrapper aside{
     min-width:100%;
   }
