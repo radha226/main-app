@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MovieService {
-  private apiUrl = 'http://www.omdbapi.com/';
+  private apiUrl = 'https://www.omdbapi.com/';
   private apiKey = 'd5c672c5';
 
   constructor(private http: HttpClient) { }

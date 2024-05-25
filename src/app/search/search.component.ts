@@ -34,8 +34,10 @@ onSearch(term: string): void {
           this.movie = data;
           this.errorMessage = '';
           const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
-           // iframe.src = `https://your-username.github.io/child-application/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}`;
-           iframe.src = `http://localhost:53590?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
+          iframe.src = `http://localhost:4500?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
+     
+          //  iframe.src = `https://radha226.github.io/movie-directory-child/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
+
           } else {
           this.handleSearchError(); // Handle error
           const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
@@ -66,9 +68,10 @@ onSearch(term: string): void {
         this.movie = data;
         this.errorMessage = '';
         const iframe = document.getElementById('movieFrame') as HTMLIFrameElement;
-        // iframe.src = `https://your-username.github.io/child-application/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}`;
+        iframe.src = `http://localhost:4500?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
       
-        iframe.src = `http://localhost:53590?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
+        // iframe.src = `https://radha226.github.io/movie-directory-child/?title=${encodeURIComponent(data.Title)}&year=${data.Year}&plot=${encodeURIComponent(data.Plot)}&poster=${encodeURIComponent(data.Poster)}&genre=${encodeURIComponent(data.Genre)}&director=${encodeURIComponent(data.Director)}&actors=${encodeURIComponent(data.Actors)}&imdbRating=${data.imdbRating}&awards=${encodeURIComponent(data.Awards)}&runtime=${encodeURIComponent(data.Runtime)}&type=${encodeURIComponent(data.Type)}`;
+
       } else {
         this.movie = null;
         this.errorMessage = 'Movie not found.';
