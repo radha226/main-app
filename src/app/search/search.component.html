@@ -1,0 +1,23 @@
+<!-- <div class="container bg-dark pt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group mb-3">
+        <input [(ngModel)]="title" (ngModelChange)="onSearch($event)" type="text" class="form-control" placeholder="Enter movie title" aria-label="Movie Title" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="button" id="button-addon2" (click)="fetchMovieDetails()">Search</button>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage && title.length> 2" class="alert alert-danger mt-4">{{ errorMessage }}</div>
+</div> -->
+<div class="logo-wrapper">
+  <img src="../assets/images/logo.png" alt="logo">
+</div>
+<div class="form-wrapper">
+  <input [(ngModel)]="title" (ngModelChange)="onSearch($event)" type="text" placeholder="Enter movie title" >
+  <img src="../../assets/images/search.png" alt="search"  (click)="fetchMovieDetails()" 
+  class="search"> 
+</div>
+<div class="error-message">
+  <div *ngIf="errorMessage && title.length> 2" class="alert alert-danger mt-4">{{ errorMessage }}</div>
+</div>
