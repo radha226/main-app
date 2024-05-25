@@ -2,8 +2,9 @@
 
 This project contains two Angular applications:
 
-1. **Main App**: This app calls the  API and passes the results to the child app.
-2. **Child App**: This app displays the results received from the main app within an iframe.
+1. **Main App**: This app is responsible for calling the OMDB API, passing the results to the child app, and displaying the child app within an iframe.
+2. 
+3. **Child App**: This app receives data from the main app, manipulates the data, and displays it on the DOM. The content from the child app is further displayed within an iframe in the main app.
 
 ## Getting Started
 
